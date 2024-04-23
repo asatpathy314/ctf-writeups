@@ -39,7 +39,7 @@ To disable `light & dark mode` set `SITE.lightAndDarkMode` to `false`.
 
 By default, if we disable `SITE.lightAndDarkMode`, we will only get system's prefers-color-scheme.
 
-Thus, to choose primary color scheme instead of prefers-color-scheme, we have to set color scheme in the primaryColorScheme variable inside `public/toggle-theme.js`.
+Thus, to choose primary color scheme instead of prefers-color-scheme, we have to set color scheme in the primaryColorScheme variable inside `/ctf-writeups/public/toggle-theme.js`.
 
 ```js
 /* file: public/toggle-theme.js */

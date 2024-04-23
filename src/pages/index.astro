@@ -25,12 +25,11 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     <section id="hero">
       <h1>Hi there! 👋</h1>
 
-
       <p>
-        This is a simple website I made to host some CTF writeups. I might occasionally
-        post some of my personal thoughts as well. Most of the writeups will be mine, but 
-        if one of teammates over at 
-        <LinkButton 
+        This is a simple website I made to host some CTF writeups. I might
+        occasionally post some of my personal thoughts as well. Most of the
+        writeups will be mine, but if one of teammates over at
+        <LinkButton
           className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
           href="https://discord.com/invite/7gPEGAarEj"
         >
@@ -68,7 +67,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
             <ul>
               {featuredPosts.map(({ data, slug }) => (
                 <Card
-                  href={`/posts/${slug}/`}
+                  href={`/ctf-writeups/posts/${slug}/`}
                   frontmatter={data}
                   secHeading={false}
                 />
@@ -89,7 +88,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
               ({ data, slug }, index) =>
                 index < 4 && (
                   <Card
-                    href={`/posts/${slug}/`}
+                    href={`/ctf-writeups/posts/${slug}/`}
                     frontmatter={data}
                     secHeading={false}
                   />
