@@ -27,18 +27,16 @@ breadcrumbList[0] === "tags" &&
 <nav class="breadcrumb" aria-label="breadcrumb">
   <ul>
     <li>
-      <a href="/ctf-writeups">Home</a>
+      <a href="/ctf-writeups">home</a>
       <span aria-hidden="true">&raquo;</span>
     </li>
     {
-      breadcrumbList.map((breadcrumb, index) =>
-        index + 1 === breadcrumbList.length ? (
+      breadcrumbList.map((breadcrumb, index) => {
+        // Skip rendering the breadcrumb for 'ctf-writeups'
+        if (breadcrumb === "ctf-writeups") return null;
+        return index + 1 === breadcrumbList.length ? (
           <li>
-            <span
-              class={`${index > 0 ? "lowercase" : "capitalize"}`}
-              aria-current="page"
-            >
-              {/* make the last part lowercase in Home > Tags > some-tag */}
+            <span class={`${"capitalize"}`} aria-current="page">
               {decodeURIComponent(breadcrumb)}
             </span>
           </li>
@@ -47,8 +45,8 @@ breadcrumbList[0] === "tags" &&
             <a href={`/ctf-writeups/${breadcrumb}/`}>{breadcrumb}</a>
             <span aria-hidden="true">&raquo;</span>
           </li>
-        )
-      )
+        );
+      })
     }
   </ul>
 </nav>
