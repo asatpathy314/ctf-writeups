@@ -8,8 +8,9 @@ draft: false
 tags:
   - rev
   - crypto
+  - python
 
-description: A short writeup on a simple rev challenge at Kernel Kombat CTF
+description: A writeup on a simple rev/crypto challenge at Kernel Kombat CTF
 ---
 
 ## Table of contents
@@ -19,7 +20,7 @@ description: A short writeup on a simple rev challenge at Kernel Kombat CTF
 This problem was placed in the `rev` category, although arguably it might've fit better
 in crypto. Either way the challenge description was the following:
 
-![hello](/ctf-writeups/public/kkctf-padding.png)
+![hello](/ctf-writeups/assets/kkctf-padding.png)
 
 The chall.c file that came with the challenge had the following content:
 
