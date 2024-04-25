@@ -18,11 +18,11 @@ description: A writeup on a simple rev/crypto challenge at Kernel Kombat CTF
 ## Introduction
 
 This problem was placed in the `rev` category, although arguably it might've fit better
-in crypto. Either way the challenge description was the following:
+in `crypto`. The challenge description was the following:
 
 ![hello](/ctf-writeups/assets/kkctf-padding.png)
 
-The chall.c file that came with the challenge had the following content:
+The `chall.c` file that came with the challenge had the following content:
 
 ```c
 #include <stdio.h>
@@ -84,9 +84,9 @@ Before we try and crack the cipher, I figured the next step was to reverse the e
 
 After reading the encryption mechanism we can make one assumption that will make our life much easier.
 
-1. The length of the plaintext = length of the key = length of the ciphertext because the Encryption function goes sequentially and is limited by the length of the key.
+1. The length of the plaintext = length of the key = length of the ciphertext because the `Encryption` function goes sequentially and is limited by the length of the key.
 
-Now that we understand what the encryption function does we can reverse it, first in C.
+Now that we understand what the `Encryption` function does we can reverse it, first in C.
 
 In order to reverse it we can perform the following operations.
 
@@ -124,7 +124,7 @@ Not the most exciting C code ever, but I tried to do my best to stay true to the
 
 ## Finding the Key
 
-The challenge description was a little on the nose about they used their "password as the secret key," so my first thought was to try rockyou.txt. For the sake of convenience I also translated Decrypt into python so I'll attach the solve script below.
+The challenge description was a little on the nose about they used their "password as the secret key," so my first thought was to try `rockyou.txt`. For the sake of convenience I also translated `Decrypt` into python so I'll attach the solve script below.
 
 ```python
 def Decryption(cipherText, key):
