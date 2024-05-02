@@ -19,7 +19,7 @@ description: A writeup on "Intro to Pwning 1" for Cyber Security Challenge Germa
 
 This challenge was an enjoyable introduction to the world of `pwn`. Although there are several excellent write-ups available, I wanted to provide a guide for complete beginners to understand how to approach this challenge.
 
-Prequisites
+Prerequisites
 
 - A basic understanding of C
 - Some understanding of return-oriented programming (ROP)
@@ -35,7 +35,7 @@ The challenge description was as follows:
 >
 > Note: The video writeup of LiveOverflow is not completely functional. To give you hint: It's about the address of the ret instruction that was chosen to re-align the stack. Suppose ASLR is rather 'smooth' - meaning a whole bunch of nibbles are zero - (which is pretty much always the case in our setup) all addresses within the offset range of 0xa00 to `0xaff` translate to addresses looking like `xxxxxxxxxx0axx`, requiring you to send the bytes `xx xx xx xx xx xx 0a xx` over the wire. Now the problem with this is that 0a is a newline `(\n)`, which in turn terminates `gets()` (refer to man 3 gets), meaning that your payload terminates prematurely.
 
-Upon downloading and unzipping the "intro-pwn-1.zip", you can find 5 files, of which only 2 are really relevant: `pwn1` and `pwn1.c` because there's no need to perform a `ret2libc` attack. The vulnerable program is as follows.
+Upon downloading and unzipping the 'intro-pwn-1.zip', you can find 5 files. Of these, only `pwn1` and `pwn1.c` are necessary for now. We don't need to mess with the `Dockerfile` yet (or at all) because we don't need to find any `libc` offsets.
 
 ```c
 void WINgardium_leviosa() {
@@ -95,7 +95,7 @@ Taking a look at the code three vulnerabilities immediately jump out at me.
 2. Format string vulnerability with `printf(read_buf)`.
 3. Stack buffer overflow with `gets(read_buf);` in the `AAAAAAAA()` function.
 
-Keeping this vulnerabilities in mind I came up with the following plan.
+Keeping these vulnerabilities in mind I came up with the following plan.
 
 1. Leak an important memory address by passing a bunch of %p's to `printf`.
 2. Use the leaked address to calculate the address of `WINgardium_leviosa`
@@ -103,7 +103,7 @@ Keeping this vulnerabilities in mind I came up with the following plan.
 
 ## Writing the Actual Exploit.
 
-I started by writing a simple python script for local debugging:
+I started by writing a simple Python script for local debugging:
 
 ```python
 from pwn import *
@@ -168,9 +168,9 @@ Running this script and examining memory with lldb, we discover that the offset 
 
 ![offsets](/ctf-writeups/assets/cscg-ctf-intro-pwn-offset.png)
 
-Now that we have our offsets, our memory leak, and we've identified our stack smashing vulnerability we're ready to perform our ret2win attack.
+Now that we have our offsets, our memory leak, and we've identified our stack smashing vulnerability we're ready to perform our `ret2win` attack.
 
-One thing to keep in mind is that we need to prepend the word "Expelliarmus" into our attack other the program exits without ever returning so our return attack doesn't work. Luckily this program is using the `gets` function which will continue reading past null bytes instead of terminating. This allows to prepend arbitrary content to pass a `strcmp` while still passing a buffer overflow payload.
+One thing to keep in mind is that we need to prepend the word 'Expelliarmus' to our attack; otherwise, the program exits without ever returning, rendering our return attack ineffective. Luckily this program is using the `gets` function which will continue reading past null bytes instead of terminating. This allows to prepend arbitrary content to pass a `strcmp` while still passing a buffer overflow payload.
 
 So, lets craft our payload:
 
@@ -183,7 +183,7 @@ io.sendline(payload)
 io.interactive()
 ```
 
-Uh-oh when we run the script on local we get a `exit code -11 (SIGSEGV)` looking at the debugger we see it segfualts on `MOVAPS`. Taking a look at the first result on Google ([ROP Emporium](https://ropemporium.com/guide.html)), it turns out that in some cases "The 64 bit calling convention requires the stack to be 16-byte aligned." So in order to align the stack we can add one more `ret` instruction to our chain, but how? Think about it like this, any section of code in memory can be executed by jumping to it. If we change our address to a `ret` instruction in memory, it will jump to and run the instruction. When we run the instruction for the second time it'll just pop another 8 bytes off the stack into the %rip register. So, let's just add a `ret` instruction to the chain.
+Uh-oh! When we run the script locally, we get an error: `exit code -11 (SIGSEGV)`. Looking at the debugger the program throws an error on `MOVAPS`. Taking a look at the first result on Google ([ROP Emporium](https://ropemporium.com/guide.html#Common%20pitfalls), it turns out that in some cases "The 64 bit calling convention requires the stack to be 16-byte aligned." So in order to align the stack we can add one more `ret` instruction to our chain, but how? We know that any section of code in memory can be executed by jumping to it. If we prepend the address of a `ret` instruction to our overflow payload, it will jump to and run the instruction. When we run the instruction for the second time it'll just pop another 8 bytes off the stack into the %rip register. So, let's just add a `ret` instruction to the chain.
 
 ```python
 rop = ROP('./pwn1')
