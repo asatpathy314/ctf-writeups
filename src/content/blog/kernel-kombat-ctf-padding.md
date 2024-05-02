@@ -1,14 +1,14 @@
 ---
 title: Kernel Kombat CTF - Padding
 author: Abhishek Satpathy
-pubDatetime: 2024-04-25T04:34:31Z
+pubDatetime: 2024-04-25T00:34:31-04:00
 slug: kernel-kombat-ctf-padding
 featured: false
 draft: false
 tags:
   - rev
   - crypto
-  - python
+  - kernel kombat
 
 description: A writeup on a simple rev/crypto challenge at Kernel Kombat CTF
 ---
@@ -20,7 +20,7 @@ description: A writeup on a simple rev/crypto challenge at Kernel Kombat CTF
 This problem was placed in the `rev` category, although arguably it might've fit better
 in `crypto`. The challenge description was the following:
 
-![hello](/ctf-writeups/assets/kkctf-padding.png)
+![description](/ctf-writeups/assets/kkctf-padding.png)
 
 The `chall.c` file that came with the challenge had the following content:
 
