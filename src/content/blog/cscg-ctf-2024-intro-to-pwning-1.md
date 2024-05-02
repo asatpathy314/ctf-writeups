@@ -4,7 +4,7 @@ author: Abhishek Satpathy
 pubDatetime: 2024-05-01T18:00:00-04:00
 slug: cscg-intro-to-pwning-1
 featured: false
-draft: true
+draft: false
 tags:
   - pwn
   - pwntools
