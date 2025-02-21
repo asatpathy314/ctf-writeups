@@ -1,8 +1,8 @@
 ---
-title: C2C 2025 - pwn'ed
+title: C2C 2025 Qualifiers - pwn'ed
 author: Abhishek Satpathy
 pubDatetime: 2025-01-20T23:15:00-04:00
-slug: cscg-intro-to-pwning-1
+slug: c2c-ctf-quals-pwned
 featured: false
 draft: false
 tags:
@@ -10,7 +10,7 @@ tags:
   - pwntools
   - CSCG
 
-description: A writeup on "Intro to Pwning 1" for Cyber Security Challenge Germany 2024 (CSCG 2024).
+description: A writeup on all the challenges in the pwn category for C2C 2025 qualifier.
 ---
 
 ## Table of contents
