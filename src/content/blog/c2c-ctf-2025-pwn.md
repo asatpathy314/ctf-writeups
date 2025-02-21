@@ -59,14 +59,13 @@ I sniff the bowl, wrinkle my nose, and whine softly—this meal just isn't doing
 
 Clearly we have to put in a specific input, so I took a look at the Ghidra decompilation. Uh-oh... it's complete nonsense. Running `file huskyhungry` reveals the executable is UPX packed, so after unpacking and taking a look in Ghidra I saw this in the `main` function.
 
-```C
+```cpp
 FUN_00401e90(s_n2n_neq{MfTjlbkFZysblJfG}_004c5100,0xb)
 ```
 
 Looking at the function it seems to be a simple Caesar cipher. I attached my labelled code (binary was stripped) below.
 
-```C
-
+```cpp
 void decrypt_flag(char *encrypted_flag, int shift)
 {
   char character;
@@ -197,10 +196,8 @@ Wait... this isn't right... I think I'm lost!
 
 Looking at the decompiled code we get a better picture of what's going on.
 
-```C
-
+```cpp
 undefined8 main(void)
-
 {
   char cVar1;
   int iVar2;
@@ -259,7 +256,7 @@ undefined8 main(void)
 
 We could probably reverse engineer the `tea_decrypt` function, but let's take a look at the `move_husky` function first.
 
-```C
+```cpp
 bool move_husky(char *param_1)
 
 {
