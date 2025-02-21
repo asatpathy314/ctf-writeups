@@ -7,8 +7,8 @@ featured: false
 draft: false
 tags:
   - pwn
-  - pwntools
-  - CSCG
+  - c2c-quals
+  - rev
 
 description: A writeup on all the challenges in the pwn category for C2C 2025 qualifier.
 ---
