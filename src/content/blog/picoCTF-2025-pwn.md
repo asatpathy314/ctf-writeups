@@ -1,7 +1,7 @@
 ---
 title: picoCTF 2025 - echo-valley and handoff
 author: Abhishek Satpathy
-pubDatetime: 2025-03-19T01:05:31
+pubDatetime: 2025-03-19-T01:15:32
 slug: picoctf-2025-pwn
 featured: false
 draft: false
@@ -26,7 +26,7 @@ Prerequisites
 
 ## Echo Valley
 
-There was no description, just a download link, so I started by just running the program.
+Description:
 
 > The echo valley is a simple function that echoes back whatever you say to it. But how do you make it respond with something more interesting, like a flag? \
 > Download the source: [`valley.c`](https://github.com/asatpathy314/picoctf-2025/blob/main/pwn/echo-valley/valley.c) \
@@ -100,7 +100,7 @@ Which means that our best path to securing the flag is to leak the address of th
 Using a sample payload I found some interesting addresses.
 
 ```shell
-elcome to the Echo Valley, Try Shouting:
+Welcome to the Echo Valley, Try Shouting:
 %p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|%p|
 You heard in the distance: 0x5555555560c1|(nil)|0x7ffff7f9ca00|(nil)|0x5555555596b0|0x70257c70257c7025|0x257c70257c70257c|0x7c70257c70257c70|0x70257c70257c7025|0x257c70257c70257c|0x7c70257c70257c70|0x70257c70257c7025|0x257c70257c70257c|0x7c70257c70257c70|0x70257c70257c7025|0xa7c70257c|(nil)|(nil)|0xf7a5753e67c48200|0x7fffffffe2d0|0x555555555413|0x1|0x7ffff7dafd90|(nil)|0x555555555401|0x100000000|0x7fffffffe3e8|(nil)|
 ```
@@ -280,8 +280,8 @@ Since we have room to write a return address on the stack, my mind immediately w
   4013c8:	ff ff ff
   4013cb:	bf 40 21 40 00       	mov    $0x402140,%edi
   4013d0:	e8 cb fc ff ff       	call   4010a0 <puts@plt>
-  4013d5:	48 8b 15 94 2c 00 00 	mov    0x2c94(%rip),%rdx        # stdin
-  4013dc:	48 8d 45 f4          	lea    -0xc(%rbp),%rax          # feedback
+  4013d5:	48 8b 15 94 2c 00 00 	mov    0x2c94(%rip),%rdx        # 404070
+  4013dc:	48 8d 45 f4          	lea    -0xc(%rbp),%rax
   4013e0:	be 20 00 00 00       	mov    $0x20,%esi
   4013e5:	48 89 c7             	mov    %rax,%rdi
   4013e8:	e8 c3 fc ff ff       	call   4010b0 <fgets@plt>
