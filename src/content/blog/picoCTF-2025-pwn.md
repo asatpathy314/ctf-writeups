@@ -9,7 +9,7 @@ tags:
   - pwn
   - rev
 
-description: A writeup on all the challenges in the pwn category for C2C 2025 qualifier.
+description: Writeups for echo-valley and handoff in picoCTF 2025.
 ---
 
 ## Table of contents
